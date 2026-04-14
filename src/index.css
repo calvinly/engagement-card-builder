@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@import "../../oslo-design-system/src/tokens/tokens.css";
+@source "../../oslo-design-system/src";
+
+/*
+ * Force light-mode theme inside the device preview.
+ * The @theme layer sets --color-*: var(--oslo-*) on :root, but when the
+ * system is in dark mode, --oslo-* resolves to dark values at :root.
+ * This rule re-binds --color-* to --oslo-* on [data-theme="light"] so
+ * children pick up the light --oslo-* values set by tokens.css.
+ */
+[data-theme="light"] {
+  --color-bg-base: var(--oslo-bg-base);
+  --color-bg-muted: var(--oslo-bg-muted);
+  --color-bg-subtle: var(--oslo-bg-subtle);
+  --color-bg-emphasis: var(--oslo-bg-emphasis);
+  --color-content-base: var(--oslo-content-base);
+  --color-content-muted: var(--oslo-content-muted);
+  --color-content-faint: var(--oslo-content-faint);
+  --color-content-subtle: var(--oslo-content-subtle);
+  --color-content-disabled: var(--oslo-content-disabled);
+  --color-content-emphasis: var(--oslo-content-emphasis);
+  --color-border-base: var(--oslo-border-base);
+  --color-border-muted: var(--oslo-border-muted);
+  --color-border-focus: var(--oslo-border-focus);
+  --color-interactive-primary: var(--oslo-interactive-primary);
+  --color-interactive-secondary: var(--oslo-interactive-secondary);
+}
