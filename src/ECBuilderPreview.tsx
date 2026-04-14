@@ -1,4 +1,4 @@
-import { CollectionDeck, FlickerCard, BottomNav, BottomNavItem } from "@oslo/design-system";
+import { CollectionDeck, FlickerCard, BottomNav, BottomNavItem } from "./oslo";
 import { Home, Send, ArrowDownToLine, Wallet } from "lucide-react";
 import { buildImageStyle, type CardConfig } from "./ECBuilderForm";
 

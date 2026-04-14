@@ -1,5 +1,6 @@
 import { useRef, type CSSProperties, type ChangeEvent, type DragEvent } from "react";
-import { OsloPlus, cn } from "@oslo/design-system";
+import { Plus } from "lucide-react";
+import { cn } from "./oslo";
 
 export interface CardConfig {
   id: string;
@@ -139,7 +140,7 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
           onClick={addCard}
           className="flex items-center gap-1 px-3 py-1.5 rounded-full border border-dashed border-white/20 text-sm font-medium text-white/50 hover:border-white/40 hover:text-white/80 transition-colors"
         >
-          <OsloPlus size={14} />
+          <Plus size={14} />
           Add Card
         </button>
       </div>

@@ -1,13 +1,11 @@
 @import "tailwindcss";
-@import "../../oslo-design-system/src/tokens/tokens.css";
-@source "../../oslo-design-system/src";
+@import "./oslo/tokens.css";
+@source "./oslo";
 
 /*
- * Force light-mode theme inside the device preview.
- * The @theme layer sets --color-*: var(--oslo-*) on :root, but when the
- * system is in dark mode, --oslo-* resolves to dark values at :root.
- * This rule re-binds --color-* to --oslo-* on [data-theme="light"] so
- * children pick up the light --oslo-* values set by tokens.css.
+ * Force light-mode Tailwind theme colors inside the device preview.
+ * Re-bind --color-* to --oslo-* on [data-theme="light"] so children
+ * pick up the light token values set by tokens.css.
  */
 [data-theme="light"] {
   --color-bg-base: var(--oslo-bg-base);

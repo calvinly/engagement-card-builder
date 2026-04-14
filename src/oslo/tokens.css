@@ -1,0 +1,695 @@
+html,
+body {
+  overflow-x: hidden;
+  font-family: "Plain", system-ui, -apple-system, sans-serif;
+}
+
+/* Hide scrollbars for native app feel */
+* {
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+ * Oslo Design System — Design Tokens
+ *
+ * Token architecture mirrors the Figma variable structure:
+ *   - base.*     → Primitive scales (spacing, radius, font sizes, etc.)
+ *   - brand.*    → Brand-specific values (font families, weights)
+ *   - scheme.*   → Semantic color roles (background, content, border)
+ *
+ * Light/dark mode is handled via the `scheme` tokens, which swap
+ * automatically based on `data-theme` or `prefers-color-scheme`.
+ */
+
+/* ──────────────────────────────────────────────
+   Custom Font Faces
+   ────────────────────────────────────────────── */
+
+@font-face {
+  font-family: "PayPal Pro";
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  src: local("PayPal Pro"), local("PayPalPro-Black"), local("PayPal Sans Big"), local("PayPalSansBig-Black"),
+       url("https://www.paypalobjects.com/marketing/pp-com-components/fonts/PayPal%20Pro/PayPalProSWeb-Black.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Plain";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: local("Plain"), local("Plain-Regular"), local("PayPal Sans Small"), local("PayPalSansSmall-Regular"),
+       url("https://www.paypalobjects.com/marketing/pp-com-components/fonts/PayPal%20Plain/PayPalPlain-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Plain";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: local("Plain"), local("Plain-Medium"), local("PayPal Sans Small"), local("PayPalSansSmall-Medium"),
+       url("https://www.paypalobjects.com/marketing/pp-com-components/fonts/PayPal%20Plain/PayPalPlain-Medium.woff2") format("woff2");
+}
+
+/* ──────────────────────────────────────────────
+   Base Tokens — Primitive Scales
+   ────────────────────────────────────────────── */
+
+:root {
+  /* Spacing */
+  --oslo-spacing-0: 0px;
+  --oslo-spacing-2: 2px;
+  --oslo-spacing-4: 4px;
+  --oslo-spacing-6: 6px;
+  --oslo-spacing-8: 8px;
+  --oslo-spacing-10: 10px;
+  --oslo-spacing-12: 12px;
+  --oslo-spacing-16: 16px;
+  --oslo-spacing-20: 20px;
+  --oslo-spacing-24: 24px;
+  --oslo-spacing-32: 32px;
+  --oslo-spacing-40: 40px;
+  --oslo-spacing-48: 48px;
+  --oslo-spacing-56: 56px;
+  --oslo-spacing-64: 64px;
+  --oslo-spacing-80: 80px;
+
+  /* Border Radius */
+  --oslo-radius-0: 0px;
+  --oslo-radius-4: 4px;
+  --oslo-radius-8: 8px;
+  --oslo-radius-12: 12px;
+  --oslo-radius-16: 16px;
+  --oslo-radius-20: 20px;
+  --oslo-radius-24: 24px;
+  --oslo-radius-32: 32px;
+  --oslo-radius-full: 999px;
+
+  /* Sizes (icons, avatars, fixed dimensions) */
+  --oslo-size-16: 16px;
+  --oslo-size-20: 20px;
+  --oslo-size-24: 24px;
+  --oslo-size-32: 32px;
+  --oslo-size-40: 40px;
+  --oslo-size-48: 48px;
+
+  /* Border Size */
+  --oslo-border-1: 1px;
+  --oslo-border-2: 2px;
+
+  /* Font Sizes */
+  --oslo-text-xs: 11px;
+  --oslo-text-sm: 12px;
+  --oslo-text-md: 14px;
+  --oslo-text-lg: 16px;
+  --oslo-text-xl: 20px;
+  --oslo-text-2xl: 24px;
+  --oslo-text-3xl: 32px;
+  --oslo-text-4xl: 40px;
+  --oslo-text-5xl: 48px;
+
+  /* Line Heights */
+  --oslo-leading-xs: 16px;
+  --oslo-leading-sm: 16px;
+  --oslo-leading-md: 20px;
+  --oslo-leading-lg: 24px;
+  --oslo-leading-xl: 28px;
+  --oslo-leading-2xl: 32px;
+  --oslo-leading-3xl: 40px;
+  --oslo-leading-4xl: 48px;
+  --oslo-leading-5xl: 56px;
+
+  /* Letter Spacing */
+  --oslo-tracking-normal: 0px;
+  --oslo-tracking-tight: -0.5px;
+  --oslo-tracking-tighter: -1px;
+
+  /* Font Families (Figma: PayPal Pro for headings, Plain for body/label) */
+  --oslo-font-heading: "PayPal Pro", system-ui, -apple-system, sans-serif;
+  --oslo-font-body: "Plain", system-ui, -apple-system, sans-serif;
+  --oslo-font-label: "Plain", system-ui, -apple-system, sans-serif;
+
+  /* Font Weights */
+  --oslo-weight-regular: 400;
+  --oslo-weight-medium: 500;
+  --oslo-weight-bold: 700;
+  --oslo-weight-black: 900;
+
+  /* Shadows */
+  --oslo-shadow-sm: 0px 1px 2px rgba(0, 0, 0, 0.06);
+  --oslo-shadow-md: 0px 4px 8px rgba(0, 0, 0, 0.08);
+  --oslo-shadow-lg: 0px 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* Transitions */
+  --oslo-duration-fast: 100ms;
+  --oslo-duration-normal: 200ms;
+  --oslo-duration-slow: 300ms;
+  --oslo-ease-default: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ──────────────────────────────────────────────
+   Light Theme (default)
+   ────────────────────────────────────────────── */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Background — Base */
+  --oslo-bg-base: #ffffff;
+  --oslo-bg-muted: #f5f7fa;
+  --oslo-bg-subtle: #edf0f5;
+  --oslo-bg-emphasis: #000000;
+
+  /* Background — Role Base */
+  --oslo-bg-neutral: #05378214;
+  --oslo-bg-info: #e3f7ff;
+  --oslo-bg-success: #e6faee;
+  --oslo-bg-error: #fbeaeb;
+  --oslo-bg-warning: #fff5e1;
+  --oslo-bg-special: #efebff;
+
+  /* Background — Role Emphasis */
+  --oslo-bg-neutral-emphasis: #000000;
+  --oslo-bg-info-emphasis: #0038ba;
+  --oslo-bg-success-emphasis: #006b51;
+  --oslo-bg-error-emphasis: #9f111f;
+  --oslo-bg-warning-emphasis: #785000;
+  --oslo-bg-special-emphasis: #3514ae;
+
+  /* Background — Brand */
+  --oslo-bg-brand-primary: #60cdff;
+  --oslo-bg-brand-secondary: #0066f5;
+  --oslo-bg-brand-tertiary: #002991;
+
+  /* Background — Container */
+  --oslo-bg-container-filled: #0537820a;
+  --oslo-bg-container-outlined: #ffffff;
+
+  /* Background — Elevated */
+  --oslo-bg-elevated-modal: #ffffff;
+  --oslo-bg-elevated-popover: #ffffff;
+  --oslo-bg-elevated-scrim: #0000007a;
+
+  /* Background — Overlay */
+  --oslo-bg-overlay-card: #ffffffa1;
+  --oslo-bg-overlay-ui: #0000007a;
+  --oslo-bg-overlay-progressbar: #0000003d;
+
+  /* Background — Utility */
+  --oslo-bg-utility-emphasis: #000000;
+  --oslo-bg-utility-selected: #000000;
+  --oslo-bg-utility-unselected: #999999;
+
+  /* Background — Shimmer */
+  --oslo-bg-shimmer-start: #ffffff3d;
+  --oslo-bg-shimmer-end: #0537820a;
+
+  /* Content — Base */
+  --oslo-content-base: #000000;
+  --oslo-content-muted: #000000a1;
+  --oslo-content-faint: #0000007a;
+  --oslo-content-subtle: #00000070;
+  --oslo-content-disabled: #00000038;
+  --oslo-content-emphasis: #ffffff;
+  --oslo-content-link: #0066f5;
+
+  /* Content — Role Base */
+  --oslo-content-neutral: #000000;
+  --oslo-content-info: #0066f5;
+  --oslo-content-success: #008053;
+  --oslo-content-warning: #785000;
+  --oslo-content-error: #c31526;
+  --oslo-content-special: #4422bf;
+
+  /* Content — Role Emphasis */
+  --oslo-content-neutral-emphasis: #ffffff;
+  --oslo-content-info-emphasis: #ffffff;
+  --oslo-content-success-emphasis: #ffffff;
+  --oslo-content-error-emphasis: #ffffff;
+  --oslo-content-warning-emphasis: #ffffff;
+  --oslo-content-special-emphasis: #ffffff;
+
+  /* Content — Brand */
+  --oslo-content-brand-primary: #000000;
+  --oslo-content-brand-secondary: #ffffff;
+  --oslo-content-brand-tertiary: #ffffff;
+
+  /* Content — Utility */
+  --oslo-content-utility-inverse: #ffffff;
+  --oslo-content-utility-selected: #000000;
+  --oslo-content-utility-unselected: #000000a1;
+
+  /* Border — Base */
+  --oslo-border-base: #00000029;
+  --oslo-border-muted: #05378214;
+  --oslo-border-focus: #0066f5;
+
+  /* Border — Role Base */
+  --oslo-border-role-neutral: #00000029;
+  --oslo-border-role-info: #60cdff;
+  --oslo-border-role-success: #73e6ab;
+  --oslo-border-role-error: #f09c9f;
+  --oslo-border-role-warning: #ffe9be;
+  --oslo-border-role-special: #b5a0ff;
+
+  /* Border — Role Emphasis */
+  --oslo-border-emphasis: #000000;
+  --oslo-border-neutral-emphasis: #000000;
+  --oslo-border-info-emphasis: #0038ba;
+  --oslo-border-success-emphasis: #006b51;
+  --oslo-border-error-emphasis: #9f111f;
+  --oslo-border-warning-emphasis: #aa7100;
+  --oslo-border-special-emphasis: #1d0088;
+
+  /* Border — Container */
+  --oslo-border-container-filled: #ffffff00;
+  --oslo-border-container-outlined: #00000029;
+
+  /* Border — Utility */
+  --oslo-border-utility-emphasis: #000000;
+  --oslo-border-utility-glow: #00000000;
+  --oslo-border-utility-selected: #000000;
+  --oslo-border-utility-unselected: #cccccc;
+  --oslo-border-badge: #ffffff;
+
+  /* Interactive */
+  --oslo-interactive-primary: #000000;
+  --oslo-interactive-primary-hover: #262626;
+  --oslo-interactive-primary-active: #404040;
+  --oslo-interactive-secondary: #05378214;
+  --oslo-interactive-secondary-hover: #05378224;
+  --oslo-interactive-secondary-active: #05378233;
+}
+
+/* ──────────────────────────────────────────────
+   Dark Theme
+   ────────────────────────────────────────────── */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Background — Base */
+  --oslo-bg-base: #000000;
+  --oslo-bg-muted: #1a1a1a;
+  --oslo-bg-subtle: #2a2a2a;
+  --oslo-bg-emphasis: #ffffff;
+
+  /* Background — Role Base */
+  --oslo-bg-neutral: #ffffff1a;
+  --oslo-bg-info: #002991;
+  --oslo-bg-success: #003d1f;
+  --oslo-bg-error: #3d0000;
+  --oslo-bg-warning: #3d2800;
+  --oslo-bg-special: #1f0a45;
+
+  /* Background — Role Emphasis */
+  --oslo-bg-neutral-emphasis: #ffffff;
+  --oslo-bg-info-emphasis: #60cdff;
+  --oslo-bg-success-emphasis: #4ade80;
+  --oslo-bg-error-emphasis: #ff6b6b;
+  --oslo-bg-warning-emphasis: #fbbf24;
+  --oslo-bg-special-emphasis: #a78bfa;
+
+  /* Background — Brand */
+  --oslo-bg-brand-primary: #ffffff;
+  --oslo-bg-brand-secondary: #60cdff;
+  --oslo-bg-brand-tertiary: #002991;
+
+  /* Background — Container */
+  --oslo-bg-container-filled: #ffffff14;
+  --oslo-bg-container-outlined: #1a1a1a;
+
+  /* Background — Elevated */
+  --oslo-bg-elevated-modal: #1a1a1a;
+  --oslo-bg-elevated-popover: #1a1a1a;
+  --oslo-bg-elevated-scrim: #0000007a;
+
+  /* Background — Overlay */
+  --oslo-bg-overlay-card: #ffffff1a;
+  --oslo-bg-overlay-ui: #0000007a;
+  --oslo-bg-overlay-progressbar: #ffffff3d;
+
+  /* Background — Utility */
+  --oslo-bg-utility-emphasis: #ffffff;
+  --oslo-bg-utility-selected: #ffffff;
+  --oslo-bg-utility-unselected: #666666;
+
+  /* Background — Shimmer */
+  --oslo-bg-shimmer-start: #ffffff14;
+  --oslo-bg-shimmer-end: #ffffff0a;
+
+  /* Content — Base */
+  --oslo-content-base: #ffffff;
+  --oslo-content-muted: #ffffffb3;
+  --oslo-content-faint: #ffffff7a;
+  --oslo-content-subtle: #ffffff80;
+  --oslo-content-disabled: #ffffff40;
+  --oslo-content-emphasis: #000000;
+  --oslo-content-link: #60cdff;
+
+  /* Content — Role Base */
+  --oslo-content-neutral: #ffffff;
+  --oslo-content-info: #60cdff;
+  --oslo-content-success: #4ade80;
+  --oslo-content-warning: #fbbf24;
+  --oslo-content-error: #ff6b6b;
+  --oslo-content-special: #a78bfa;
+
+  /* Content — Role Emphasis */
+  --oslo-content-neutral-emphasis: #000000;
+  --oslo-content-info-emphasis: #000000;
+  --oslo-content-success-emphasis: #000000;
+  --oslo-content-error-emphasis: #000000;
+  --oslo-content-warning-emphasis: #000000;
+  --oslo-content-special-emphasis: #000000;
+
+  /* Content — Brand */
+  --oslo-content-brand-primary: #ffffff;
+  --oslo-content-brand-secondary: #000000;
+  --oslo-content-brand-tertiary: #ffffff;
+
+  /* Content — Utility */
+  --oslo-content-utility-inverse: #000000;
+  --oslo-content-utility-selected: #ffffff;
+  --oslo-content-utility-unselected: #ffffffb3;
+
+  /* Border — Base */
+  --oslo-border-base: #ffffff26;
+  --oslo-border-muted: #ffffff14;
+  --oslo-border-focus: #60cdff;
+
+  /* Border — Role Base */
+  --oslo-border-role-neutral: #ffffff26;
+  --oslo-border-role-info: #60cdff;
+  --oslo-border-role-success: #4ade80;
+  --oslo-border-role-error: #ff6b6b;
+  --oslo-border-role-warning: #fbbf24;
+  --oslo-border-role-special: #a78bfa;
+
+  /* Border — Role Emphasis */
+  --oslo-border-emphasis: #ffffff;
+  --oslo-border-neutral-emphasis: #ffffff;
+  --oslo-border-info-emphasis: #60cdff;
+  --oslo-border-success-emphasis: #4ade80;
+  --oslo-border-error-emphasis: #ff6b6b;
+  --oslo-border-warning-emphasis: #fbbf24;
+  --oslo-border-special-emphasis: #a78bfa;
+
+  /* Border — Container */
+  --oslo-border-container-filled: #ffffff14;
+  --oslo-border-container-outlined: #ffffff26;
+
+  /* Border — Utility */
+  --oslo-border-utility-emphasis: #ffffff;
+  --oslo-border-utility-glow: #ffffff00;
+  --oslo-border-utility-selected: #ffffff;
+  --oslo-border-utility-unselected: #666666;
+  --oslo-border-badge: #000000;
+
+  /* Interactive */
+  --oslo-interactive-primary: #ffffff;
+  --oslo-interactive-primary-hover: #e0e0e0;
+  --oslo-interactive-primary-active: #c0c0c0;
+  --oslo-interactive-secondary: #ffffff1a;
+  --oslo-interactive-secondary-hover: #ffffff29;
+  --oslo-interactive-secondary-active: #ffffff38;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --oslo-bg-base: #000000;
+    --oslo-bg-muted: #1a1a1a;
+    --oslo-bg-subtle: #2a2a2a;
+    --oslo-bg-emphasis: #ffffff;
+
+    --oslo-bg-neutral: #ffffff1a;
+    --oslo-bg-info: #002991;
+    --oslo-bg-success: #003d1f;
+    --oslo-bg-error: #3d0000;
+    --oslo-bg-warning: #3d2800;
+    --oslo-bg-special: #1f0a45;
+
+    --oslo-bg-neutral-emphasis: #ffffff;
+    --oslo-bg-info-emphasis: #60cdff;
+    --oslo-bg-success-emphasis: #4ade80;
+    --oslo-bg-error-emphasis: #ff6b6b;
+    --oslo-bg-warning-emphasis: #fbbf24;
+    --oslo-bg-special-emphasis: #a78bfa;
+
+    --oslo-bg-brand-primary: #ffffff;
+    --oslo-bg-brand-secondary: #60cdff;
+    --oslo-bg-brand-tertiary: #002991;
+
+    --oslo-bg-container-filled: #ffffff14;
+    --oslo-bg-container-outlined: #1a1a1a;
+
+    --oslo-bg-elevated-modal: #1a1a1a;
+    --oslo-bg-elevated-popover: #1a1a1a;
+    --oslo-bg-elevated-scrim: #0000007a;
+
+    --oslo-bg-overlay-card: #ffffff1a;
+    --oslo-bg-overlay-ui: #0000007a;
+    --oslo-bg-overlay-progressbar: #ffffff3d;
+
+    --oslo-bg-utility-emphasis: #ffffff;
+    --oslo-bg-utility-selected: #ffffff;
+    --oslo-bg-utility-unselected: #666666;
+
+    --oslo-bg-shimmer-start: #ffffff14;
+    --oslo-bg-shimmer-end: #ffffff0a;
+
+    --oslo-content-base: #ffffff;
+    --oslo-content-muted: #ffffffb3;
+    --oslo-content-faint: #ffffff7a;
+    --oslo-content-subtle: #ffffff80;
+    --oslo-content-disabled: #ffffff40;
+    --oslo-content-emphasis: #000000;
+    --oslo-content-link: #60cdff;
+
+    --oslo-content-neutral: #ffffff;
+    --oslo-content-info: #60cdff;
+    --oslo-content-success: #4ade80;
+    --oslo-content-warning: #fbbf24;
+    --oslo-content-error: #ff6b6b;
+    --oslo-content-special: #a78bfa;
+
+    --oslo-content-neutral-emphasis: #000000;
+    --oslo-content-info-emphasis: #000000;
+    --oslo-content-success-emphasis: #000000;
+    --oslo-content-error-emphasis: #000000;
+    --oslo-content-warning-emphasis: #000000;
+    --oslo-content-special-emphasis: #000000;
+
+    --oslo-content-brand-primary: #ffffff;
+    --oslo-content-brand-secondary: #000000;
+    --oslo-content-brand-tertiary: #ffffff;
+
+    --oslo-content-utility-inverse: #000000;
+    --oslo-content-utility-selected: #ffffff;
+    --oslo-content-utility-unselected: #ffffffb3;
+
+    --oslo-border-base: #ffffff26;
+    --oslo-border-muted: #ffffff14;
+    --oslo-border-focus: #60cdff;
+
+    --oslo-border-role-neutral: #ffffff26;
+    --oslo-border-role-info: #60cdff;
+    --oslo-border-role-success: #4ade80;
+    --oslo-border-role-error: #ff6b6b;
+    --oslo-border-role-warning: #fbbf24;
+    --oslo-border-role-special: #a78bfa;
+
+    --oslo-border-emphasis: #ffffff;
+    --oslo-border-neutral-emphasis: #ffffff;
+    --oslo-border-info-emphasis: #60cdff;
+    --oslo-border-success-emphasis: #4ade80;
+    --oslo-border-error-emphasis: #ff6b6b;
+    --oslo-border-warning-emphasis: #fbbf24;
+    --oslo-border-special-emphasis: #a78bfa;
+
+    --oslo-border-container-filled: #ffffff14;
+    --oslo-border-container-outlined: #ffffff26;
+
+    --oslo-border-utility-emphasis: #ffffff;
+    --oslo-border-utility-glow: #ffffff00;
+    --oslo-border-utility-selected: #ffffff;
+    --oslo-border-utility-unselected: #666666;
+    --oslo-border-badge: #000000;
+
+    --oslo-interactive-primary: #ffffff;
+    --oslo-interactive-primary-hover: #e0e0e0;
+    --oslo-interactive-primary-active: #c0c0c0;
+    --oslo-interactive-secondary: #ffffff1a;
+    --oslo-interactive-secondary-hover: #ffffff29;
+    --oslo-interactive-secondary-active: #ffffff38;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   Tailwind v4 Theme
+   ────────────────────────────────────────────── */
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@theme {
+  /* Spacing */
+  --spacing-0: var(--oslo-spacing-0);
+  --spacing-0_5: var(--oslo-spacing-2);
+  --spacing-1: var(--oslo-spacing-4);
+  --spacing-1_5: var(--oslo-spacing-6);
+  --spacing-2: var(--oslo-spacing-8);
+  --spacing-2_5: var(--oslo-spacing-10);
+  --spacing-3: var(--oslo-spacing-12);
+  --spacing-4: var(--oslo-spacing-16);
+  --spacing-5: var(--oslo-spacing-20);
+  --spacing-6: var(--oslo-spacing-24);
+  --spacing-8: var(--oslo-spacing-32);
+  --spacing-10: var(--oslo-spacing-40);
+  --spacing-12: var(--oslo-spacing-48);
+  --spacing-14: var(--oslo-spacing-56);
+  --spacing-16: var(--oslo-spacing-64);
+  --spacing-20: var(--oslo-spacing-80);
+
+  /* Border Radius */
+  --radius-xs: var(--oslo-radius-4);
+  --radius-sm: var(--oslo-radius-8);
+  --radius-md: var(--oslo-radius-12);
+  --radius-lg: var(--oslo-radius-16);
+  --radius-xl: var(--oslo-radius-20);
+  --radius-2xl: var(--oslo-radius-24);
+  --radius-full: var(--oslo-radius-full);
+
+  /* Font Family */
+  --font-heading: var(--oslo-font-heading);
+  --font-body: var(--oslo-font-body);
+  --font-label: var(--oslo-font-label);
+
+  /* Font Size */
+  --text-xs: var(--oslo-text-xs);
+  --text-sm: var(--oslo-text-sm);
+  --text-base: var(--oslo-text-md);
+  --text-lg: var(--oslo-text-lg);
+  --text-xl: var(--oslo-text-xl);
+  --text-2xl: var(--oslo-text-2xl);
+  --text-3xl: var(--oslo-text-3xl);
+  --text-4xl: var(--oslo-text-4xl);
+  --text-5xl: var(--oslo-text-5xl);
+
+  /* Colors — Background */
+  --color-bg-base: var(--oslo-bg-base);
+  --color-bg-muted: var(--oslo-bg-muted);
+  --color-bg-subtle: var(--oslo-bg-subtle);
+  --color-bg-emphasis: var(--oslo-bg-emphasis);
+  --color-bg-neutral: var(--oslo-bg-neutral);
+  --color-bg-info: var(--oslo-bg-info);
+  --color-bg-success: var(--oslo-bg-success);
+  --color-bg-error: var(--oslo-bg-error);
+  --color-bg-warning: var(--oslo-bg-warning);
+  --color-bg-special: var(--oslo-bg-special);
+  --color-bg-neutral-emphasis: var(--oslo-bg-neutral-emphasis);
+  --color-bg-info-emphasis: var(--oslo-bg-info-emphasis);
+  --color-bg-success-emphasis: var(--oslo-bg-success-emphasis);
+  --color-bg-error-emphasis: var(--oslo-bg-error-emphasis);
+  --color-bg-warning-emphasis: var(--oslo-bg-warning-emphasis);
+  --color-bg-special-emphasis: var(--oslo-bg-special-emphasis);
+  --color-bg-brand-primary: var(--oslo-bg-brand-primary);
+  --color-bg-brand-secondary: var(--oslo-bg-brand-secondary);
+  --color-bg-brand-tertiary: var(--oslo-bg-brand-tertiary);
+  --color-bg-container-filled: var(--oslo-bg-container-filled);
+  --color-bg-container-outlined: var(--oslo-bg-container-outlined);
+  --color-bg-elevated-modal: var(--oslo-bg-elevated-modal);
+  --color-bg-elevated-popover: var(--oslo-bg-elevated-popover);
+  --color-bg-elevated-scrim: var(--oslo-bg-elevated-scrim);
+  --color-bg-overlay-card: var(--oslo-bg-overlay-card);
+  --color-bg-overlay-ui: var(--oslo-bg-overlay-ui);
+  --color-bg-overlay-progressbar: var(--oslo-bg-overlay-progressbar);
+  --color-bg-utility-emphasis: var(--oslo-bg-utility-emphasis);
+  --color-bg-utility-selected: var(--oslo-bg-utility-selected);
+  --color-bg-utility-unselected: var(--oslo-bg-utility-unselected);
+  --color-bg-shimmer-start: var(--oslo-bg-shimmer-start);
+  --color-bg-shimmer-end: var(--oslo-bg-shimmer-end);
+
+  /* Colors — Content */
+  --color-content-base: var(--oslo-content-base);
+  --color-content-muted: var(--oslo-content-muted);
+  --color-content-faint: var(--oslo-content-faint);
+  --color-content-subtle: var(--oslo-content-subtle);
+  --color-content-disabled: var(--oslo-content-disabled);
+  --color-content-emphasis: var(--oslo-content-emphasis);
+  --color-content-link: var(--oslo-content-link);
+  --color-content-neutral: var(--oslo-content-neutral);
+  --color-content-info: var(--oslo-content-info);
+  --color-content-success: var(--oslo-content-success);
+  --color-content-warning: var(--oslo-content-warning);
+  --color-content-error: var(--oslo-content-error);
+  --color-content-special: var(--oslo-content-special);
+  --color-content-neutral-emphasis: var(--oslo-content-neutral-emphasis);
+  --color-content-info-emphasis: var(--oslo-content-info-emphasis);
+  --color-content-success-emphasis: var(--oslo-content-success-emphasis);
+  --color-content-error-emphasis: var(--oslo-content-error-emphasis);
+  --color-content-warning-emphasis: var(--oslo-content-warning-emphasis);
+  --color-content-special-emphasis: var(--oslo-content-special-emphasis);
+  --color-content-brand-primary: var(--oslo-content-brand-primary);
+  --color-content-brand-secondary: var(--oslo-content-brand-secondary);
+  --color-content-brand-tertiary: var(--oslo-content-brand-tertiary);
+  --color-content-utility-inverse: var(--oslo-content-utility-inverse);
+  --color-content-utility-selected: var(--oslo-content-utility-selected);
+  --color-content-utility-unselected: var(--oslo-content-utility-unselected);
+
+  /* Colors — Border */
+  --color-border-base: var(--oslo-border-base);
+  --color-border-muted: var(--oslo-border-muted);
+  --color-border-focus: var(--oslo-border-focus);
+  --color-border-emphasis: var(--oslo-border-emphasis);
+  --color-border-role-neutral: var(--oslo-border-role-neutral);
+  --color-border-role-info: var(--oslo-border-role-info);
+  --color-border-role-success: var(--oslo-border-role-success);
+  --color-border-role-error: var(--oslo-border-role-error);
+  --color-border-role-warning: var(--oslo-border-role-warning);
+  --color-border-role-special: var(--oslo-border-role-special);
+  --color-border-neutral-emphasis: var(--oslo-border-neutral-emphasis);
+  --color-border-info-emphasis: var(--oslo-border-info-emphasis);
+  --color-border-success-emphasis: var(--oslo-border-success-emphasis);
+  --color-border-error-emphasis: var(--oslo-border-error-emphasis);
+  --color-border-warning-emphasis: var(--oslo-border-warning-emphasis);
+  --color-border-special-emphasis: var(--oslo-border-special-emphasis);
+  --color-border-container-filled: var(--oslo-border-container-filled);
+  --color-border-container-outlined: var(--oslo-border-container-outlined);
+  --color-border-utility-emphasis: var(--oslo-border-utility-emphasis);
+  --color-border-utility-glow: var(--oslo-border-utility-glow);
+  --color-border-utility-selected: var(--oslo-border-utility-selected);
+  --color-border-utility-unselected: var(--oslo-border-utility-unselected);
+
+  /* Colors — Interactive */
+  --color-interactive-primary: var(--oslo-interactive-primary);
+  --color-interactive-primary-hover: var(--oslo-interactive-primary-hover);
+  --color-interactive-primary-active: var(--oslo-interactive-primary-active);
+  --color-interactive-secondary: var(--oslo-interactive-secondary);
+  --color-interactive-secondary-hover: var(--oslo-interactive-secondary-hover);
+  --color-interactive-secondary-active: var(--oslo-interactive-secondary-active);
+}
