@@ -116,7 +116,6 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
     if (file) handleFile(file);
   };
 
-  const imageStyle = buildImageStyle(config.scale, config.posX, config.posY);
 
   const inputClass = "w-full px-3 py-2 rounded-xl border border-white/15 bg-white/5 text-white font-body text-sm focus:outline-none focus:border-white/40 transition-colors placeholder:text-white/30";
 
