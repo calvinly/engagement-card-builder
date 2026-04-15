@@ -5,7 +5,7 @@ export interface LibraryImage {
 }
 
 export function libraryImageUrl(filename: string) {
-  return `/library/${filename}`;
+  return `${import.meta.env.BASE_URL}library/${filename}`;
 }
 
 export const IMAGE_LIBRARY: LibraryImage[] = [
