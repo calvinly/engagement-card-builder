@@ -7,6 +7,54 @@
  * Re-bind --color-* to --oslo-* on [data-theme="light"] so children
  * pick up the light token values set by tokens.css.
  */
+/* Range input — remove native track border/background */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--oslo-bg-brand-secondary) var(--range-fill, 0%),
+    rgba(255, 255, 255, 0.15) var(--range-fill, 0%)
+  );
+  border: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--oslo-bg-brand-secondary);
+  border: none;
+  margin-top: -5px;
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--oslo-bg-brand-secondary) var(--range-fill, 0%),
+    rgba(255, 255, 255, 0.15) var(--range-fill, 0%)
+  );
+  border: none;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--oslo-bg-brand-secondary);
+  border: none;
+  cursor: pointer;
+}
+
 [data-theme="light"] {
   --color-bg-base: var(--oslo-bg-base);
   --color-bg-muted: var(--oslo-bg-muted);

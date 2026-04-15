@@ -1,0 +1,165 @@
+export interface LibraryImage {
+  filename: string;
+  label?: string;
+  category: string;
+}
+
+export function libraryImageUrl(filename: string) {
+  return `/library/${filename}`;
+}
+
+export const IMAGE_LIBRARY: LibraryImage[] = [
+  // ─── SMB — Candles ───────────────────────────────────────────────────────────
+  { category: "SMB · Candles", filename: "SMB/2024.12.19.Candles_0200.jpg", label: "Candle shop: artisan reaching for hanging tapers" },
+  { category: "SMB · Candles", filename: "SMB/2024.12.19.Candles_0463.jpg", label: "0463" },
+  { category: "SMB · Candles", filename: "SMB/2024.12.19.Candles_0578.jpg", label: "0578" },
+  { category: "SMB · Candles", filename: "SMB/2024.12.19.Candles_0743.jpg", label: "0743" },
+  { category: "SMB · Candles", filename: "SMB/2024.12.19.Candles_1405.jpg", label: "1405" },
+  { category: "SMB · Candles", filename: "SMB/2024.12.19.Candles_1709.jpg", label: "1709" },
+
+  // ─── SMB — Skate Shop ────────────────────────────────────────────────────────
+  { category: "SMB · Skate Shop", filename: "SMB/2024.12.19.Skate.Shop_0035.jpg", label: "Skateboard decks stacked on white wall racks" },
+  { category: "SMB · Skate Shop", filename: "SMB/2024.12.19.Skate.Shop_0086.jpg", label: "0086" },
+  { category: "SMB · Skate Shop", filename: "SMB/2024.12.19.Skate.Shop_0165.jpg", label: "0165" },
+  { category: "SMB · Skate Shop", filename: "SMB/2024.12.19.Skate.Shop_0303.jpg", label: "0303" },
+  { category: "SMB · Skate Shop", filename: "SMB/2024.12.19.Skate.Shop_0784.jpg", label: "0784" },
+  { category: "SMB · Skate Shop", filename: "SMB/2024.12.19.Skate.Shop_0839.jpg", label: "0839" },
+  { category: "SMB · Skate Shop", filename: "SMB/2024.12.19.Skate.Shop_1275.jpg", label: "1275" },
+
+  // ─── SMB — Shoot 01 ──────────────────────────────────────────────────────────
+  { category: "SMB · Shoot 01", filename: "SMB/241121_SR_PAYPAL_SHOT_01_814.jpg",  label: "814" },
+  { category: "SMB · Shoot 01", filename: "SMB/241121_SR_PAYPAL_SHOT_01_1357.jpg", label: "1357" },
+  { category: "SMB · Shoot 01", filename: "SMB/241121_SR_PAYPAL_SHOT_01_1837.jpg", label: "1837" },
+  { category: "SMB · Shoot 01", filename: "SMB/241121_SR_PAYPAL_SHOT_01_1856.jpg", label: "1856" },
+  { category: "SMB · Shoot 01", filename: "SMB/241121_SR_PAYPAL_SHOT_01_2309.jpg", label: "2309" },
+  { category: "SMB · Shoot 01", filename: "SMB/241121_SR_PAYPAL_SHOT_01_2793.jpg", label: "2793" },
+  { category: "SMB · Shoot 01", filename: "SMB/241121_SR_PAYPAL_SHOT_01_3153.jpg", label: "3153" },
+  { category: "SMB · Shoot 01", filename: "SMB/241121_SR_PAYPAL_SHOT_01_3762.jpg", label: "3762" },
+
+  // ─── SMB — UK CS ─────────────────────────────────────────────────────────────
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_271.jpg",  label: "CS001 · 271" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_1704.jpg", label: "CS001 · 1704" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_1713.jpg", label: "CS001 · 1713" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_1825.jpg", label: "CS001 · 1825" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_1877.jpg", label: "CS001 · 1877" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_1937.jpg", label: "CS001 · 1937" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_1973.jpg", label: "CS001 · 1973" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_2004.jpg", label: "CS001 · 2004" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_2021.jpg", label: "CS001 · 2021" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_2138.jpg", label: "CS001 · 2138" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_2252.jpg", label: "CS001 · 2252" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_001_2345.jpg", label: "CS001 · 2345" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_002_034.jpg",  label: "CS002 · 034" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_002_151.jpg",  label: "CS002 · 151" },
+  { category: "SMB · UK CS", filename: "SMB/241211_PAYPAL_UK_CS_003_086.jpg",  label: "CS003 · 086" },
+
+  // ─── SMB — UK PCL ────────────────────────────────────────────────────────────
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_001_003.jpg", label: "PCL001 · 003" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_001_087.jpg", label: "PCL001 · 087" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_001_109.jpg", label: "PCL001 · 109" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_001_118.jpg", label: "PCL001 · 118" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_002_011.jpg", label: "PCL002 · 011" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_002_062.jpg", label: "PCL002 · 062" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_003_050.jpg", label: "PCL003 · 050" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_003_147.jpg", label: "PCL003 · 147" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_003_559.jpg", label: "PCL003 · 559" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_004_070.jpg", label: "PCL004 · 070" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_004_097.jpg", label: "PCL004 · 097" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_004_115.jpg", label: "PCL004 · 115" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_004_127.jpg", label: "PCL004 · 127" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_004_220.jpg", label: "PCL004 · 220" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_004_304.jpg", label: "PCL004 · 304" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_004_374.jpg", label: "PCL004 · 374" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_004_423.jpg", label: "PCL004 · 423" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_004_437.jpg", label: "PCL004 · 437" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_004_508.jpg", label: "PCL004 · 508" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_005_427.jpg", label: "PCL005 · 427" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_005_467.jpg", label: "PCL005 · 467" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_005_517.jpg", label: "PCL005 · 517" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_005_615.jpg", label: "PCL005 · 615" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_005_749.jpg", label: "PCL005 · 749" },
+  { category: "SMB · UK PCL", filename: "SMB/241211_PAYPAL_UK_PCL_005_761.jpg", label: "PCL005 · 761" },
+
+  // ─── SMB — Pasta Shop ────────────────────────────────────────────────────────
+  { category: "SMB · Pasta Shop", filename: "SMB/PAYPAL DAY 01 SMB PASTA SHOP 0372 f1.jpg", label: "0372" },
+  { category: "SMB · Pasta Shop", filename: "SMB/PAYPAL DAY 01 SMB PASTA SHOP 0796 f1.jpg", label: "0796" },
+
+  // ─── Tap to Pay ──────────────────────────────────────────────────────────────
+  { category: "Tap to Pay", filename: "TapToPay/TTP_Studio_3895_ALT_V2.jpg", label: "3895 Alt v2" },
+  { category: "Tap to Pay", filename: "TapToPay/TTP_Studio_4091.jpg",        label: "Phone tap-to-pay on white handheld reader" },
+  { category: "Tap to Pay", filename: "TapToPay/TTP_Studio_4093.jpg",        label: "4093" },
+  { category: "Tap to Pay", filename: "TapToPay/TTP_Studio_4137.jpg",        label: "4137" },
+  { category: "Tap to Pay", filename: "TapToPay/TTP_Studio_4198.jpg",        label: "4198" },
+  { category: "Tap to Pay", filename: "TapToPay/TTP_Studio_4243.jpg",        label: "4243" },
+  { category: "Tap to Pay", filename: "TapToPay/TTP_Studio_4386.jpg",        label: "4386" },
+
+  // ─── Other ───────────────────────────────────────────────────────────────────
+  { category: "Other", filename: "Other/audience-component-story-scroll-1-size-tablet-up.jpg",                label: "Story scroll" },
+  { category: "Other", filename: "Other/card-wrapped-tools-2_size-all.jpg",                                   label: "Card wrapped tools" },
+  { category: "Other", filename: "Other/feature-column-split-section_size-all.jpg",                            label: "Feature column split" },
+  { category: "Other", filename: "Other/mkt-us-page-tap-to-pay-component-stack-section-2-size-tablet-up.jpg", label: "Tap to Pay stack" },
+  { category: "Other", filename: "Other/solopreneur-component-card-wrapped-payments-3-size-all.jpg",           label: "Solopreneur payments" },
+  { category: "Other", filename: "Other/us-business-debit-card-product-value-section-1-all-updated.jpg",        label: "Business Debit Card" },
+  { category: "Other", filename: "Other/videoframe_1252.jpg",                                                   label: "Video frame 1252" },
+  { category: "Other", filename: "Other/videoframe_4027.jpg",                                                   label: "Video frame 4027" },
+
+  // ─── BDMC 2025 ───────────────────────────────────────────────────────────────
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202526530.jpg",        label: "Hand holding PayPal Business Debit card, blue background" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202526580.jpg",        label: "26580" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202527210.jpg",        label: "27210" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202527460.jpg",        label: "Two hands with PayPal Business Debit cards, blue" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202527490.jpg",        label: "27490" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202528550.jpg",        label: "28550" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202528670.jpg",        label: "28670" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 20252883 10.jpg",      label: "28830 alt" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202528830.jpg",        label: "28830" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202529130.jpg",        label: "29130" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202529200.jpg",        label: "29200" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202529500.jpg",        label: "29500" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202529510.jpg",        label: "29510" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202529800.jpg",        label: "29800" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202529970_v02.jpg",    label: "29970 v2" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202530100_v02.jpg",    label: "30100 v2" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC 202530190.jpg",        label: "30190" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_30400.jpg",       label: "30400" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_30760.jpg",       label: "30760" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_31170.jpg",       label: "31170" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_31620.jpg",       label: "31620" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_3173_chip_v01.jpg", label: "3173 Chip v1" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_31810.jpg",       label: "31810" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_31810 (1).jpg",   label: "31810 (1)" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_32490.jpg",       label: "32490" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_32490 (1).jpg",   label: "32490 (1)" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_32700.jpg",       label: "32700" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_32700 (1).jpg",   label: "32700 (1)" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_32860_v02.jpg",   label: "32860 v2" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_32910.jpg",       label: "32910" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_33160.jpg",       label: "33160" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_33160 (1).jpg",   label: "33160 (1)" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_33160 (2).jpg",   label: "33160 (2)" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_33220.jpg",       label: "33220" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_33450.jpg",       label: "33450" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_45780.jpg",       label: "45780" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_45780 (1).jpg",   label: "45780 (1)" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_46040.jpg",       label: "46040" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_46070.jpg",       label: "46070" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_46200.jpg",       label: "46200" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_46520.jpg",       label: "46520" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_46600.jpg",       label: "46600" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_46730_v02.jpg",   label: "46730 v2" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_46910_v02.jpg",   label: "46910 v2" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_46960_v02.jpg",   label: "46960 v2" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_47140.jpg",       label: "47140" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_47320.jpg",       label: "47320" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_47370.jpg",       label: "47370" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_47460.jpg",       label: "47460" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_47610.jpg",       label: "47610" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_47680.jpg",       label: "47680" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_47810.jpg",       label: "47810" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_48090.jpg",       label: "48090" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_49450.jpg",       label: "49450" },
+  { category: "BDMC 2025", filename: "BDMC-2025/BDMC_2025_49680_v02.jpg",   label: "49680 v2" },
+];
+
+/** All unique category names, in the order they first appear */
+export const IMAGE_CATEGORIES = [...new Set(IMAGE_LIBRARY.map((img) => img.category))];
