@@ -31,7 +31,7 @@ export function ECBuilderPreview({ cards, activeIndex, onActiveIndexChange, a11y
 
         {/* Screen */}
         <div
-          className="relative w-[390px] h-[844px] rounded-[2.25rem] overflow-hidden bg-white"
+          className="relative w-[402px] h-[874px] rounded-[2.25rem] overflow-hidden bg-white"
           data-theme="light"
           style={{
             colorScheme: 'light',
@@ -76,8 +76,8 @@ export function ECBuilderPreview({ cards, activeIndex, onActiveIndexChange, a11y
             className="pt-4 pb-4"
             style={a11yMode ? {
               '--ec-title-scale': '1.25',
-              '--ec-subtitle-scale': '1.5',
-              '--ec-cta-scale': '1.5',
+              '--ec-subtitle-scale': '2',
+              '--ec-cta-scale': '2',
             } as React.CSSProperties : undefined}
           >
             <CollectionDeck cards={deckCards} activeIndex={activeIndex} onActiveIndexChange={onActiveIndexChange} />

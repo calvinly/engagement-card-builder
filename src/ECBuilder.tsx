@@ -1,7 +1,9 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import JSZip from "jszip";
 import { ECBuilderForm, createCardConfig, type CardConfig } from "./ECBuilderForm";
 import { ECBuilderPreview } from "./ECBuilderPreview";
+import { exportForDevelopment } from "./exportDev";
+import { saveDraft, loadDraft } from "./autosave";
 
 function exportCardConfig(card: CardConfig) {
   return {
@@ -30,6 +32,26 @@ export function ECBuilder() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [a11yMode, setA11yMode] = useState(false);
   const importInputRef = useRef<HTMLInputElement>(null);
+  const loadedRef = useRef(false);
+
+  useEffect(() => {
+    loadDraft().then((draft) => {
+      if (draft) {
+        setCards(draft.cards);
+        setActiveIndex(draft.activeIndex);
+        setA11yMode(draft.a11yMode);
+      }
+      loadedRef.current = true;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!loadedRef.current) return;
+    const timeout = setTimeout(() => {
+      saveDraft(cards, activeIndex, a11yMode);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [cards, activeIndex, a11yMode]);
 
   const hasContent = cards.some((c) => c.title || c.image);
 
@@ -86,6 +108,10 @@ export function ECBuilder() {
     await navigator.clipboard.writeText(JSON.stringify(data, null, 2));
   }, [cards]);
 
+  const handleExportDev = useCallback(async () => {
+    await exportForDevelopment(cards);
+  }, [cards]);
+
   const handleDownloadZip = useCallback(async () => {
     const zip = new JSZip();
 
@@ -133,25 +159,25 @@ export function ECBuilder() {
           </p>
           <div className="flex gap-3">
             <button
-              onClick={handleCopyClipboard}
-              disabled={!hasContent}
-              className="flex-1 px-4 py-2.5 rounded-full bg-white text-black font-label font-medium text-sm disabled:opacity-40 hover:bg-white/90 transition-colors"
-            >
-              Copy JSON
-            </button>
-            <button
               onClick={handleDownloadZip}
               disabled={!hasContent}
               className="flex-1 px-4 py-2.5 rounded-full bg-white/10 text-white font-label font-medium text-sm disabled:opacity-40 hover:bg-white/20 transition-colors"
             >
               Download ZIP
             </button>
+            <button
+              onClick={() => importInputRef.current?.click()}
+              className="flex-1 px-4 py-2.5 rounded-full bg-white/10 text-white font-label font-medium text-sm hover:bg-white/20 transition-colors"
+            >
+              Import ZIP
+            </button>
           </div>
           <button
-            onClick={() => importInputRef.current?.click()}
-            className="w-full px-4 py-2.5 rounded-full bg-white/10 text-white font-label font-medium text-sm hover:bg-white/20 transition-colors"
+            onClick={handleExportDev}
+            disabled={!hasContent}
+            className="w-full px-4 py-2.5 rounded-full bg-blue-500 text-white font-label font-medium text-sm disabled:opacity-40 hover:bg-blue-600 transition-colors"
           >
-            Import ZIP
+            Export to Development
           </button>
           <input
             ref={importInputRef}

@@ -136,7 +136,7 @@ export const CollectionDeck = forwardRef<HTMLDivElement, CollectionDeckProps>(
         {...props}
       >
         {/* Card stack */}
-        <div className="relative w-full h-[425px]">
+        <div className="relative w-full h-[477px]">
           {cards.map((card, i) => {
             const isActive = i === activeIndex;
 
@@ -161,7 +161,7 @@ export const CollectionDeck = forwardRef<HTMLDivElement, CollectionDeckProps>(
               >
                 <div
                   className={cn(
-                    "w-[72%] max-w-[290px] h-full",
+                    "h-full aspect-[2/3]",
                     isActive && "cursor-grab active:cursor-grabbing select-none touch-none",
                   )}
                 >

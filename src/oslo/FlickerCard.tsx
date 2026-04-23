@@ -67,19 +67,19 @@ export const FlickerCard = forwardRef<HTMLDivElement, FlickerCardProps>(
         <div className="relative flex flex-col flex-1 z-10 p-4">
           {/* Header: title + dismiss */}
           <div className="flex items-start gap-2">
-            <div className="flex-1 pt-2">
+            <div className="flex-1">
               {title && (
                 <h3
-                  className="font-heading font-black text-3xl leading-[34px] tracking-[var(--oslo-tracking-tighter)] text-white whitespace-pre-line"
-                  style={{ fontSize: 'calc(1.875rem * var(--ec-title-scale, 1))', lineHeight: 'calc(34px * var(--ec-title-scale, 1))' }}
+                  className="font-heading font-black text-[40px] leading-[40px] tracking-[var(--oslo-tracking-tighter)] text-white whitespace-pre-line"
+                  style={{ fontSize: 'calc(40px * var(--ec-title-scale, 1))', lineHeight: 'calc(40px * var(--ec-title-scale, 1))' }}
                 >
                   {title}
                 </h3>
               )}
               {subtitle && (
                 <p
-                  className="font-body text-lg leading-[var(--oslo-leading-lg)] text-white/90 mt-1"
-                  style={{ fontSize: 'calc(1.125rem * var(--ec-subtitle-scale, 1))', lineHeight: 'calc(1.75rem * var(--ec-subtitle-scale, 1))' }}
+                  className="font-body text-[16px] leading-[24px] text-white/90 mt-1"
+                  style={{ fontSize: 'calc(16px * var(--ec-subtitle-scale, 1))', lineHeight: 'calc(24px * var(--ec-subtitle-scale, 1))' }}
                 >
                   {subtitle}
                 </p>
@@ -129,10 +129,10 @@ export const FlickerCard = forwardRef<HTMLDivElement, FlickerCardProps>(
             {cta && (
               <button
                 onClick={(e) => { e.stopPropagation(); onAction?.(); }}
-                className="px-4 py-2 rounded-full bg-white/70 backdrop-blur-[8px] font-label font-medium text-sm text-black shrink-0"
+                className="px-4 py-2 min-h-10 rounded-full bg-white/70 backdrop-blur-[8px] font-label font-medium text-black shrink-0 flex items-center"
                 style={{
                   fontSize: 'calc(0.875rem * var(--ec-cta-scale, 1))',
-                  padding: 'calc(0.5rem * var(--ec-cta-scale, 1)) calc(1rem * var(--ec-cta-scale, 1))',
+                  lineHeight: 'calc(1.25rem * var(--ec-cta-scale, 1))',
                 }}
               >
                 {cta}

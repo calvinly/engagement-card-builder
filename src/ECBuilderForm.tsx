@@ -122,9 +122,9 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
   return (
     <div className="flex flex-col gap-6 p-6 overflow-y-auto h-full">
       <div>
-        <h1 className="font-heading font-black text-4xl leading-[var(--oslo-leading-4xl)] tracking-[var(--oslo-tracking-tighter)] text-white">Engagement Card Builder</h1>
+        <h1 className="font-heading font-black text-4xl leading-[var(--oslo-leading-4xl)] tracking-[var(--oslo-tracking-tighter)] text-white">Engagement Card Builder <span className="font-body text-lg font-normal text-white/30">v1.0</span></h1>
         <p className="font-body text-sm text-white/50 mt-1">
-          Create engagement cards for the homepage collection deck.
+          Create engagements cards for the Oslo biz experience home.
         </p>
       </div>
 
