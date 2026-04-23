@@ -5,6 +5,17 @@ import { ECBuilderPreview } from "./ECBuilderPreview";
 import { exportForDevelopment } from "./exportDev";
 import { saveDraft, loadDraft } from "./autosave";
 
+function formatTimestamp(): string {
+  const d = new Date();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  const yyyy = d.getFullYear();
+  const hh = String(d.getHours()).padStart(2, "0");
+  const min = String(d.getMinutes()).padStart(2, "0");
+  const ss = String(d.getSeconds()).padStart(2, "0");
+  return `${mm}${dd}${yyyy}-${hh}${min}${ss}`;
+}
+
 function exportCardConfig(card: CardConfig) {
   return {
     title: card.title,
@@ -132,7 +143,7 @@ export function ECBuilder() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `engagement-cards-${Date.now()}.zip`;
+    a.download = `oslo-biz-engage-cards-${formatTimestamp()}.zip`;
     a.click();
     URL.revokeObjectURL(url);
   }, [cards]);

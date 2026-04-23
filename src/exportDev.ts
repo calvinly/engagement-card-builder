@@ -1,6 +1,17 @@
 import JSZip from "jszip";
 import type { CardConfig } from "./ECBuilderForm";
 
+function formatTimestamp(): string {
+  const d = new Date();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  const yyyy = d.getFullYear();
+  const hh = String(d.getHours()).padStart(2, "0");
+  const min = String(d.getMinutes()).padStart(2, "0");
+  const ss = String(d.getSeconds()).padStart(2, "0");
+  return `${mm}${dd}${yyyy}-${hh}${min}${ss}`;
+}
+
 const CARD_WIDTH = 318;
 const CARD_HEIGHT = 477;
 const DENSITIES = [1, 2, 3] as const;
@@ -307,7 +318,8 @@ export async function exportForDevelopment(cards: CardConfig[]): Promise<void> {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `engagement-cards-dev-${Date.now()}.zip`;
+  const ts = formatTimestamp();
+  a.download = `oslo-biz-engage-cards-dev-${ts}.zip`;
   a.click();
   URL.revokeObjectURL(url);
 }
