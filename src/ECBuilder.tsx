@@ -4,6 +4,7 @@ import { ECBuilderForm, createCardConfig, type CardConfig } from "./ECBuilderFor
 import { ECBuilderPreview } from "./ECBuilderPreview";
 import { exportForDevelopment } from "./exportDev";
 import { saveDraft, loadDraft } from "./autosave";
+import { useUndoHistory } from "./useUndoHistory";
 
 function formatTimestamp(): string {
   const d = new Date();
@@ -39,8 +40,13 @@ function parseImageClassName(cls: string): { scale: number; posX: number; posY: 
 }
 
 export function ECBuilder() {
-  const [cards, setCards] = useState<CardConfig[]>([createCardConfig()]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const {
+    cards, activeIndex,
+    setCards, setActiveIndexSilent,
+    setCardsAndIndex, replaceState,
+    registerFile,
+    pauseSnapshots, resumeSnapshots,
+  } = useUndoHistory({ maxHistory: 20 });
   const [a11yMode, setA11yMode] = useState(false);
   const importInputRef = useRef<HTMLInputElement>(null);
   const loadedRef = useRef(false);
@@ -48,9 +54,13 @@ export function ECBuilder() {
   useEffect(() => {
     loadDraft().then((draft) => {
       if (draft) {
-        setCards(draft.cards);
-        setActiveIndex(draft.activeIndex);
+        replaceState(draft.cards, draft.activeIndex);
         setA11yMode(draft.a11yMode);
+        for (const card of draft.cards) {
+          if (card.image && card.imageFile) {
+            registerFile(card.image, card.imageFile);
+          }
+        }
       }
       loadedRef.current = true;
     });
@@ -106,18 +116,14 @@ export function ECBuilder() {
     );
 
     if (imported.length > 0) {
-      setCards(imported);
-      setActiveIndex(0);
+      for (const card of imported) {
+        if (card.image && card.imageFile) {
+          registerFile(card.image, card.imageFile);
+        }
+      }
+      setCardsAndIndex(imported, 0);
     }
-  }, []);
-
-  const handleCopyClipboard = useCallback(async () => {
-    const data = {
-      cards: cards.map(exportCardConfig),
-      createdAt: new Date().toISOString(),
-    };
-    await navigator.clipboard.writeText(JSON.stringify(data, null, 2));
-  }, [cards]);
+  }, [setCardsAndIndex, registerFile]);
 
   const handleExportDev = useCallback(async () => {
     await exportForDevelopment(cards);
@@ -157,7 +163,11 @@ export function ECBuilder() {
             cards={cards}
             activeIndex={activeIndex}
             onCardsChange={setCards}
-            onActiveIndexChange={setActiveIndex}
+            onActiveIndexChange={setActiveIndexSilent}
+            onCardsAndIndexChange={setCardsAndIndex}
+            registerFile={registerFile}
+            pauseSnapshots={pauseSnapshots}
+            resumeSnapshots={resumeSnapshots}
             a11yMode={a11yMode}
             onA11yModeChange={setA11yMode}
           />
@@ -206,7 +216,7 @@ export function ECBuilder() {
 
       {/* Right: Live Preview */}
       <div className="flex-1 bg-gray-100 overflow-hidden">
-        <ECBuilderPreview cards={cards} activeIndex={activeIndex} onActiveIndexChange={setActiveIndex} a11yMode={a11yMode} />
+        <ECBuilderPreview cards={cards} activeIndex={activeIndex} onActiveIndexChange={setActiveIndexSilent} a11yMode={a11yMode} />
       </div>
     </div>
   );

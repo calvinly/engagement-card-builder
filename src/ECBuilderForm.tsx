@@ -1,6 +1,7 @@
 import { useRef, useState, type CSSProperties, type ChangeEvent, type DragEvent } from "react";
-import { Plus, Images, Upload, LayoutGrid, Grid3X3 } from "lucide-react";
+import { Plus, Images, Upload, LayoutGrid, Grid3X3, X } from "lucide-react";
 import { cn } from "./oslo";
+
 import { IMAGE_LIBRARY, IMAGE_CATEGORIES, libraryImageUrl, type LibraryImage } from "./imageLibrary";
 
 export interface CardConfig {
@@ -50,11 +51,15 @@ interface ECBuilderFormProps {
   activeIndex: number;
   onCardsChange: (cards: CardConfig[]) => void;
   onActiveIndexChange: (index: number) => void;
+  onCardsAndIndexChange: (cards: CardConfig[], index: number) => void;
+  registerFile: (url: string, file: File) => void;
+  pauseSnapshots: () => void;
+  resumeSnapshots: () => void;
   a11yMode: boolean;
   onA11yModeChange: (enabled: boolean) => void;
 }
 
-export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndexChange, a11yMode, onA11yModeChange }: ECBuilderFormProps) {
+export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndexChange, onCardsAndIndexChange, registerFile, pauseSnapshots, resumeSnapshots, a11yMode, onA11yModeChange }: ECBuilderFormProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showLibrary, setShowLibrary] = useState(false);
   const [libraryView, setLibraryView] = useState<"2col" | "4col">("4col");
@@ -71,19 +76,19 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
   };
 
   const addCard = () => {
-    onCardsChange([createCardConfig(), ...cards]);
-    onActiveIndexChange(0);
+    onCardsAndIndexChange([createCardConfig(), ...cards], 0);
   };
 
   const removeCard = (index: number) => {
     if (cards.length <= 1) return;
     const updated = cards.filter((_, i) => i !== index);
-    onCardsChange(updated);
+    let newIndex = activeIndex;
     if (activeIndex >= updated.length) {
-      onActiveIndexChange(updated.length - 1);
+      newIndex = updated.length - 1;
     } else if (activeIndex > index) {
-      onActiveIndexChange(activeIndex - 1);
+      newIndex = activeIndex - 1;
     }
+    onCardsAndIndexChange(updated, newIndex);
   };
 
   const handleLibrarySelect = async (img: LibraryImage) => {
@@ -92,6 +97,7 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
       const response = await fetch(url);
       const blob = await response.blob();
       const file = new File([blob], img.filename, { type: blob.type || "image/jpeg" });
+      registerFile(url, file);
       updateCard({ image: url, imageFile: file, imageFileName: img.filename });
     } catch {
       updateCard({ image: url, imageFile: null, imageFileName: img.filename });
@@ -102,6 +108,7 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
   const handleFile = (file: File) => {
     if (!file.type.startsWith("image/")) return;
     const url = URL.createObjectURL(file);
+    registerFile(url, file);
     updateCard({ image: url, imageFile: file, imageFileName: file.name });
   };
 
@@ -122,7 +129,7 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
   return (
     <div className="flex flex-col gap-6 p-6 overflow-y-auto h-full">
       <div>
-        <h1 className="font-heading font-black text-4xl leading-[var(--oslo-leading-4xl)] tracking-[var(--oslo-tracking-tighter)] text-white">Engagement Card Builder <span className="font-body text-lg font-normal text-white/30">v1.0</span></h1>
+        <h1 className="font-heading font-black text-4xl leading-[var(--oslo-leading-4xl)] tracking-[var(--oslo-tracking-tighter)] text-white">Engagement Card Builder 1.0</h1>
         <p className="font-body text-sm text-white/50 mt-1">
           Create engagements cards for the Oslo biz experience home.
         </p>
@@ -292,7 +299,19 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
             >
               {config.image ? (
                 <div className="space-y-2">
-                  <p className="font-body text-sm text-white/50">{config.imageFileName}</p>
+                  <div className="flex items-center justify-center gap-2">
+                    <p className="font-body text-sm text-white/50 truncate">{config.imageFileName}</p>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateCard({ image: null, imageFile: null, imageFileName: "", scale: 1, posX: 50, posY: 50 });
+                      }}
+                      className="shrink-0 p-0.5 rounded-full hover:bg-white/10 text-white/40 hover:text-white/80 transition-colors"
+                    >
+                      <X size={14} />
+                    </button>
+                  </div>
                   <p className="font-body text-sm text-blue-400">Click or drop to replace</p>
                 </div>
               ) : (
@@ -325,6 +344,8 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
                   value={config.scale}
                   style={{ "--range-fill": `${((config.scale - 0.5) / 2.5) * 100}%` } as CSSProperties}
                   onChange={(e) => updateCard({ scale: parseFloat(e.target.value) })}
+                  onPointerDown={pauseSnapshots}
+                  onPointerUp={resumeSnapshots}
                   className="w-full"
                 />
               </div>
@@ -338,6 +359,8 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
                   value={config.posX}
                   style={{ "--range-fill": `${config.posX}%` } as CSSProperties}
                   onChange={(e) => updateCard({ posX: parseInt(e.target.value) })}
+                  onPointerDown={pauseSnapshots}
+                  onPointerUp={resumeSnapshots}
                   className="w-full"
                 />
               </div>
@@ -351,6 +374,8 @@ export function ECBuilderForm({ cards, activeIndex, onCardsChange, onActiveIndex
                   value={config.posY}
                   style={{ "--range-fill": `${config.posY}%` } as CSSProperties}
                   onChange={(e) => updateCard({ posY: parseInt(e.target.value) })}
+                  onPointerDown={pauseSnapshots}
+                  onPointerUp={resumeSnapshots}
                   className="w-full"
                 />
               </div>

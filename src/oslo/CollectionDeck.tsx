@@ -7,7 +7,7 @@ import {
   type ReactNode,
   type PointerEvent as ReactPointerEvent,
 } from "react";
-import { cn } from "./cn";
+import { cn } from "@oslo/design-system/utils/cn";
 
 export interface CollectionDeckProps extends HTMLAttributes<HTMLDivElement> {
   cards: ReactNode[];

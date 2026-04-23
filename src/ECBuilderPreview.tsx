@@ -1,5 +1,5 @@
 import { CollectionDeck, FlickerCard, BottomNav, BottomNavItem } from "./oslo";
-import { Home, Send, ArrowDownToLine, Wallet } from "lucide-react";
+import { Home, ArrowUp, ArrowDown, Briefcase } from "lucide-react";
 import { buildImageStyle, type CardConfig } from "./ECBuilderForm";
 
 interface ECBuilderPreviewProps {
@@ -31,7 +31,7 @@ export function ECBuilderPreview({ cards, activeIndex, onActiveIndexChange, a11y
 
         {/* Screen */}
         <div
-          className="relative w-[402px] h-[874px] rounded-[2.25rem] overflow-hidden bg-white"
+          className="relative flex flex-col w-[402px] h-[874px] rounded-[2.25rem] overflow-hidden bg-white"
           data-theme="light"
           style={{
             colorScheme: 'light',
@@ -61,35 +61,30 @@ export function ECBuilderPreview({ cards, activeIndex, onActiveIndexChange, a11y
             </div>
           </div>
 
-          {/* Top Nav */}
-          <div className="bg-black px-4 pb-4 pt-[66px]">
-            <div className="flex items-center gap-3 h-10">
-              <div className="flex-1 min-w-0 flex items-center gap-2 opacity-50">
-                <div className="size-6 rounded-full bg-white/20" />
-                <span className="font-label font-medium text-sm text-white">Search or ask a question</span>
-              </div>
-            </div>
-          </div>
+          {/* Top Nav spacer */}
+          <div className="bg-black pt-[66px] pb-8" />
 
-          {/* Collection Deck */}
-          <div
-            className="pt-4 pb-4"
-            style={a11yMode ? {
-              '--ec-title-scale': '1.25',
-              '--ec-subtitle-scale': '2',
-              '--ec-cta-scale': '2',
-            } as React.CSSProperties : undefined}
-          >
-            <CollectionDeck cards={deckCards} activeIndex={activeIndex} onActiveIndexChange={onActiveIndexChange} />
+          {/* Collection Deck — vertically centered */}
+          <div className="flex-1 flex flex-col justify-center bg-white rounded-t-2xl -mt-4 pb-[106px]">
+            <div
+              className="py-4"
+              style={a11yMode ? {
+                '--ec-title-scale': '1.25',
+                '--ec-subtitle-scale': '2',
+                '--ec-cta-scale': '2',
+              } as React.CSSProperties : undefined}
+            >
+              <CollectionDeck cards={deckCards} activeIndex={activeIndex} onActiveIndexChange={onActiveIndexChange} />
+            </div>
           </div>
 
           {/* Bottom nav */}
           <div className="absolute bottom-0 inset-x-0 z-[55]">
             <BottomNav>
               <BottomNavItem icon={<Home size={20} />} label="Home" active />
-              <BottomNavItem icon={<Send size={20} />} label="Pay" />
-              <BottomNavItem icon={<ArrowDownToLine size={20} />} label="Get Paid" />
-              <BottomNavItem icon={<Wallet size={20} />} label="Me" />
+              <BottomNavItem icon={<ArrowUp size={20} />} label="Pay" />
+              <BottomNavItem icon={<ArrowDown size={20} />} label="Get Paid" />
+              <BottomNavItem icon={<Briefcase size={20} />} label="Me" />
             </BottomNav>
           </div>
         </div>

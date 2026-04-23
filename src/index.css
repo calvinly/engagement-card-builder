@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "./oslo/tokens.css";
+@import "@oslo/design-system/tokens/tokens.css";
+@source "../../oslo-design-system/src";
 @source "./oslo";
 
 /*

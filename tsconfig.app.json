@@ -19,7 +19,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@oslo/design-system": ["../oslo-design-system/src"],
+      "@oslo/design-system/*": ["../oslo-design-system/src/*"]
+    }
   },
   "include": ["src"]
 }

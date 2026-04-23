@@ -1,5 +1,5 @@
 import { forwardRef, type CSSProperties, type HTMLAttributes, type ReactNode } from "react";
-import { cn } from "./cn";
+import { cn } from "@oslo/design-system/utils/cn";
 import { X } from "lucide-react";
 
 export interface FlickerCardProps extends HTMLAttributes<HTMLDivElement> {
